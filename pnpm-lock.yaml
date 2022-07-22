@@ -9,8 +9,11 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.30.7
   '@typescript-eslint/parser': ^5.30.7
   '@vitejs/plugin-react': ^2.0.0
+  babylonjs: 4.1.0
+  babylonjs-loaders: 4.1.0
   eslint: ^8.20.0
   eslint-config-prettier: ^8.5.0
+  normalize.css: ^8.0.1
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -20,6 +23,8 @@ specifiers:
   vite-tsconfig-paths: ^3.5.0
 
 dependencies:
+  babylonjs: 4.1.0
+  babylonjs-loaders: 4.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -34,6 +39,7 @@ devDependencies:
   '@vitejs/plugin-react': 2.0.0_vite@3.0.2
   eslint: 8.20.0
   eslint-config-prettier: 8.5.0_eslint@8.20.0
+  normalize.css: 8.0.1
   prettier: 2.7.1
   typescript: 4.7.4
   vite: 3.0.2
@@ -769,6 +775,21 @@ packages:
     transitivePeerDependencies:
       - debug
     dev: true
+
+  /babylonjs-gltf2interface/4.1.0:
+    resolution: {integrity: sha512-H2obg+4t8bcmLyzGiOQqmUaTQqTu+6mJUlsMWZvmRBf0k2fQVeTdAkH7aDy6HVIz/THvpIx4ntG1Lsyquvmc5Q==}
+    dev: false
+
+  /babylonjs-loaders/4.1.0:
+    resolution: {integrity: sha512-gNC+XEVI5cLJLVRTlkFHVfSY4EZS0VzWzEmNb8M49ZMFNuqOuHsVnQZg4Vms9e4LgvNtws4Z0SWrRanZnkIX5g==}
+    dependencies:
+      babylonjs: 4.1.0
+      babylonjs-gltf2interface: 4.1.0
+    dev: false
+
+  /babylonjs/4.1.0:
+    resolution: {integrity: sha512-MnaH1BQIL+PYgqGaAvGVdP8yd7nM1j6sbQi/K/6+RlkHPxIETW2NbjqxiW7Sywgy7r3PwqWT/gxG4Bz95Z6/yA==}
+    dev: false
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1602,6 +1623,10 @@ packages:
 
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
+    dev: true
+
+  /normalize.css/8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
     dev: true
 
   /once/1.4.0:
