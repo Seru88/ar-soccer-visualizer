@@ -1,6 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@babylonjs/core': ^5.16.0
+  '@babylonjs/gui': ^5.16.0
+  '@babylonjs/loaders': ^5.16.0
   '@nabla/vite-plugin-eslint': ^1.4.1
   '@types/eslint': ^8.4.5
   '@types/node': ^18.0.6
@@ -9,8 +12,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.30.7
   '@typescript-eslint/parser': ^5.30.7
   '@vitejs/plugin-react': ^2.0.0
-  babylonjs: 4.1.0
-  babylonjs-loaders: 4.1.0
+  babylonjs-gltf2interface: ^5.16.0
   eslint: ^8.20.0
   eslint-config-prettier: ^8.5.0
   normalize.css: ^8.0.1
@@ -23,8 +25,10 @@ specifiers:
   vite-tsconfig-paths: ^3.5.0
 
 dependencies:
-  babylonjs: 4.1.0
-  babylonjs-loaders: 4.1.0
+  '@babylonjs/core': 5.16.0
+  '@babylonjs/gui': 5.16.0_@babylonjs+core@5.16.0
+  '@babylonjs/loaders': 5.16.0_k4dfn7twbkk3d6qhznf236rz2e
+  babylonjs-gltf2interface: 5.16.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
@@ -308,6 +312,32 @@ packages:
       '@babel/helper-validator-identifier': 7.18.6
       to-fast-properties: 2.0.0
     dev: true
+
+  /@babylonjs/core/5.16.0:
+    resolution: {integrity: sha512-6sHhLCxemO9jXpUqzssJOSAlzXk0QW2YW+lSP7wRS4nCK55bw+xasSGe+toQjy4SzpmW/gaeJ2c8yxo4kUyH4Q==}
+    dependencies:
+      tslib: 2.4.0
+    dev: false
+
+  /@babylonjs/gui/5.16.0_@babylonjs+core@5.16.0:
+    resolution: {integrity: sha512-q1DzMyKmojrq0zFigRD+Z93dkjgn/03qRj9ESMkv9aaJZMllG+VaO17gCf5/qpffS+PhQQ7KuxcvgnpKvKzGhQ==}
+    peerDependencies:
+      '@babylonjs/core': ^5.0.0
+    dependencies:
+      '@babylonjs/core': 5.16.0
+      tslib: 2.4.0
+    dev: false
+
+  /@babylonjs/loaders/5.16.0_k4dfn7twbkk3d6qhznf236rz2e:
+    resolution: {integrity: sha512-tHRZHCxjpzX4ZYbuv8oZ5IqBMP3JKRDKnT4DRN3JTrX7lA1HKVuj1HDeqweUgXmDpQhkNLaioN8zKVyjYtf9mg==}
+    peerDependencies:
+      '@babylonjs/core': ^5.0.0
+      babylonjs-gltf2interface: ^5.0.0
+    dependencies:
+      '@babylonjs/core': 5.16.0
+      babylonjs-gltf2interface: 5.16.0
+      tslib: 2.4.0
+    dev: false
 
   /@cush/relative/1.0.0:
     resolution: {integrity: sha512-RpfLEtTlyIxeNPGKcokS+p3BZII/Q3bYxryFRglh5H3A3T8q9fsLYm72VYAMEOOIBLEa8o93kFLiBDUWKrwXZA==}
@@ -776,19 +806,8 @@ packages:
       - debug
     dev: true
 
-  /babylonjs-gltf2interface/4.1.0:
-    resolution: {integrity: sha512-H2obg+4t8bcmLyzGiOQqmUaTQqTu+6mJUlsMWZvmRBf0k2fQVeTdAkH7aDy6HVIz/THvpIx4ntG1Lsyquvmc5Q==}
-    dev: false
-
-  /babylonjs-loaders/4.1.0:
-    resolution: {integrity: sha512-gNC+XEVI5cLJLVRTlkFHVfSY4EZS0VzWzEmNb8M49ZMFNuqOuHsVnQZg4Vms9e4LgvNtws4Z0SWrRanZnkIX5g==}
-    dependencies:
-      babylonjs: 4.1.0
-      babylonjs-gltf2interface: 4.1.0
-    dev: false
-
-  /babylonjs/4.1.0:
-    resolution: {integrity: sha512-MnaH1BQIL+PYgqGaAvGVdP8yd7nM1j6sbQi/K/6+RlkHPxIETW2NbjqxiW7Sywgy7r3PwqWT/gxG4Bz95Z6/yA==}
+  /babylonjs-gltf2interface/5.16.0:
+    resolution: {integrity: sha512-mwXrSmlD1NuhLDjlJ5tNInL1Bd03mUaVBfqh1++ARr/ZiJGhG/D1Rp//CX/vvQLcR5Xi1HxvmDxIffj11HLjwQ==}
     dev: false
 
   /balanced-match/1.0.2:
@@ -1903,6 +1922,10 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
+
+  /tslib/2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: false
 
   /tsutils/3.21.0_typescript@4.7.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

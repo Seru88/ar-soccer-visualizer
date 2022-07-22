@@ -21,6 +21,8 @@ declare global {
   let LandingPage: any
 }
 
+// window.BABYLON = BABYLON
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />

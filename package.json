@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "babylonjs": "4.1.0",
-    "babylonjs-loaders": "4.1.0",
+    "@babylonjs/core": "^5.16.0",
+    "@babylonjs/gui": "^5.16.0",
+    "@babylonjs/loaders": "^5.16.0",
+    "babylonjs-gltf2interface": "^5.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
