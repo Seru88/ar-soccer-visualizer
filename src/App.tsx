@@ -314,6 +314,54 @@ const placeObjectTouchHandler = (e: TouchEvent) => {
   }
 }
 
+const startScene = () => {
+  const canvas = document.getElementById(
+    'renderCanvas'
+  ) as HTMLCanvasElement | null
+  if (canvas) {
+    engine = new Engine(canvas, true, {
+      stencil: true,
+      preserveDrawingBuffer: true
+    })
+    engine.enableOfflineSupport = false
+
+    scene = new Scene(engine)
+    freeCam = new FreeCamera('mainCam', new Vector3(0, 0, 0), scene)
+
+    initXrScene() // Add objects to the scene and set starting camera position.
+
+    // Connect the camera to the XR engine and show camera feed
+    freeCam.addBehavior(XR8.Babylonjs.xrCameraBehavior(xrCamConfig), true)
+
+    canvas.addEventListener('touchstart', placeObjectTouchHandler, true) // Add touch listener.
+
+    engine.runRenderLoop(() => {
+      // Enable TWEEN animations.
+      TWEEN.update(performance.now())
+      scene.render()
+    })
+
+    window.addEventListener('resize', () => {
+      engine.resize()
+    })
+  }
+}
+
+const onxrloaded = () => {
+  XR8.XrController.configure(xrControllerConfig)
+  XR8.addCameraPipelineModules([
+    // Add camera pipeline modules.
+    // XRExtras.AlmostThere.pipelineModule(), // Detects unsupported browsers and gives hints.
+    XR8.XrController.pipelineModule(), // Enables SLAM
+    XRExtras.FullWindowCanvas.pipelineModule(), // Modifies the canvas to fill the window.
+    XRExtras.Loading.pipelineModule(), // Manages the loading screen on startup.
+    LandingPage.pipelineModule(), // Detects unsupported browsers and gives hints.
+    XRExtras.RuntimeError.pipelineModule() // Shows an error image on runtime error.
+  ])
+
+  startScene()
+}
+
 function App() {
   const hasInit = useRef(false)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -324,54 +372,48 @@ function App() {
       return
     }
 
-    XR8.XrController.configure(xrControllerConfig)
-
-    const canvas = canvasRef.current
-    if (canvas) {
-      XR8.addCameraPipelineModules([
-        // XRExtras.AlmostThere.pipelineModule(), // Detects unsupported browsers and gives hints.
-        XR8.XrController.pipelineModule(), // Enables SLAM
-        XRExtras.FullWindowCanvas.pipelineModule(), // Modifies the canvas to fill the window.
-        XRExtras.Loading.pipelineModule(), // Manages the loading screen on startup.
-        LandingPage.pipelineModule(), // Detects unsupported browsers and gives hints.
-        XRExtras.RuntimeError.pipelineModule() // Shows an error image on runtime error.
-      ])
-      engine = new Engine(canvas, true, {
-        stencil: true,
-        preserveDrawingBuffer: true
-      })
-      engine.enableOfflineSupport = false
-
-      scene = new Scene(engine)
-      freeCam = new FreeCamera('mainCam', new Vector3(0, 0, 0), scene)
-      // orbitCam = new ArcRotateCamera(
-      //   'debugCam',
-      //   Tools.ToRadians(270),
-      //   Tools.ToRadians(80),
-      //   20,
-      //   Vector3.Zero(),
-      //   scene,
-      //   true
-      // )
-      // orbitCam.attachControl(canvas, true)
-
-      initXrScene() // Add objects to the scene and set starting camera position.
-
-      // Connect the camera to the XR engine and show camera feed
-      freeCam.addBehavior(XR8.Babylonjs.xrCameraBehavior(xrCamConfig), true)
-
-      canvas.addEventListener('touchstart', placeObjectTouchHandler, true) // Add touch listener.
-
-      engine.runRenderLoop(() => {
-        // Enable TWEEN animations.
-        TWEEN.update(performance.now())
-        scene.render()
-      })
-
-      window.addEventListener('resize', () => {
-        engine.resize()
-      })
+    // Show loading screen before the full XR library has been loaded.
+    const load = () => {
+      XRExtras.Loading.showLoading({ onxrloaded })
     }
+    window.onload = () => {
+      if (window.XRExtras) {
+        load()
+      } else {
+        window.addEventListener('xrextrasloaded', load)
+      }
+    }
+
+    // XR8.XrController.configure(xrControllerConfig)
+
+    // const canvas = canvasRef.current
+    // if (canvas) {
+    //   XR8.addCameraPipelineModules([
+    //     // XRExtras.AlmostThere.pipelineModule(), // Detects unsupported browsers and gives hints.
+    //     XR8.XrController.pipelineModule(), // Enables SLAM
+    //     XRExtras.FullWindowCanvas.pipelineModule(), // Modifies the canvas to fill the window.
+    //     XRExtras.Loading.pipelineModule(), // Manages the loading screen on startup.
+    //     LandingPage.pipelineModule(), // Detects unsupported browsers and gives hints.
+    //     XRExtras.RuntimeError.pipelineModule() // Shows an error image on runtime error.
+    //   ])
+
+    //   initXrScene() // Add objects to the scene and set starting camera position.
+
+    //   // Connect the camera to the XR engine and show camera feed
+    //   freeCam.addBehavior(XR8.Babylonjs.xrCameraBehavior(xrCamConfig), true)
+
+    //   canvas.addEventListener('touchstart', placeObjectTouchHandler, true) // Add touch listener.
+
+    //   engine.runRenderLoop(() => {
+    //     // Enable TWEEN animations.
+    //     TWEEN.update(performance.now())
+    //     scene.render()
+    //   })
+
+    //   window.addEventListener('resize', () => {
+    //     engine.resize()
+    //   })
+    // }
   }, [])
 
   return (
